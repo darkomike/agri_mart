@@ -5,25 +5,30 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
     required this.controller,
-     this.width,
-    required this.height,
-    this.autofocus,
+   
+    this.disabledBorder,
+    this.autofocus, this.minLines, this.maxLines,
     this.cursorColor,
+    this.focusedBorder,
     this.keyboardAppearance,
     this.keyboardType,
-    this.suffix,this.border, this.enabledBoarder, this.focusColor,
+    this.suffix,
+    this.border, this.labelStyle,
+    this.enabledBoarder,
+    this.focusColor,
     this.onChanged,
     this.validator,
     this.hintText,
-     this.label,
+    this.label,
   }) : super(key: key);
 
   final TextEditingController controller;
   final Widget? label;
 
   final String? hintText;
-  final double? width;
-  final double height;
+  final int? maxLines;
+  final int? minLines;
+  
   final String? Function(String?)? validator;
   final bool? autofocus;
   final Color? cursorColor;
@@ -32,27 +37,37 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onChanged;
   final Brightness? keyboardAppearance;
   final Widget? suffix;
+  final TextStyle? labelStyle;
   final InputBorder? border;
   final InputBorder? enabledBoarder;
+  final InputBorder? focusedBorder;
+  final InputBorder? disabledBorder;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      width: width,
-      height: height,
-      child: TextFormField(
-        validator: validator,
-        autocorrect: true,
-        autofocus: autofocus ?? true,
-        cursorColor: cursorColor ?? ColorConstants.greenPantone,
-        keyboardType: keyboardType,
-        onChanged: onChanged,
-        
-        keyboardAppearance: keyboardAppearance,
-        controller: controller,
-        decoration: InputDecoration(enabledBorder: enabledBoarder, focusColor: focusColor,
-            label: label, hintText: hintText, suffix: suffix, border: border),
-      ),
+    return TextFormField(
+      validator: validator,
+      autocorrect: true,
+      autofocus: autofocus ?? false,
+      cursorColor: cursorColor ?? ColorConstants.greenPantone,
+      keyboardType: keyboardType,
+      onChanged: onChanged,
+      keyboardAppearance: keyboardAppearance,
+      minLines: minLines,
+      maxLines: maxLines,
+       autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      decoration: InputDecoration(
+          
+          labelStyle: labelStyle,
+          focusedBorder: focusedBorder,
+          disabledBorder: disabledBorder,
+          enabledBorder: enabledBoarder,
+          fillColor: ColorConstants.greenPantone,
+          focusColor: focusColor,
+          label: label,
+          hintText: hintText,
+          suffix: suffix,
+          border: border),
     );
   }
 }

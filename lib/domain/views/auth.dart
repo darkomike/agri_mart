@@ -55,27 +55,29 @@ class _AuthScreenState extends State<AuthScreen>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 LottieWidget(width: width, height: height),
-               WelcomeMessage(),
-                CustomElevatedButton(
-                  
-                  padding: const EdgeInsets.only(top: 10, bottom: 10),
-                alignment: Alignment.center,
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    ColorConstants.greenPantone,
-                  ),
-                  overlayColor: MaterialStateProperty.all<Color>(
-                    ColorConstants.someRockGreen,
-                  ),
-                  buttonOutlineColor: ColorConstants.greenPantone,
-                  title: "Connect to Wallet",
-                  onPressed: () {
-                    _showConnectDialog(context);
-                  },
-                  elevation: 5,
-                  titleStyle:
-                      const TextStyle(color: Colors.white, fontSize: 16),
+                WelcomeMessage(),
+                Container(
                   height: 60,
-                  
+                                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+
+                  width: 300,
+                  child: CustomElevatedButton(
+                    alignment: Alignment.center,
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      ColorConstants.greenPantone,
+                    ),
+                    overlayColor: MaterialStateProperty.all<Color>(
+                      ColorConstants.someRockGreen,
+                    ),
+                    buttonOutlineColor: ColorConstants.greenPantone,
+                    title: "Connect to Wallet",
+                    onPressed: () {
+                      _showConnectDialog(context);
+                    },
+                    elevation: 5,
+                    titleStyle:
+                        const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
                 ),
               ],
             ),
@@ -90,7 +92,8 @@ class _AuthScreenState extends State<AuthScreen>
         context: context,
         builder: (context) {
           return Dialog(
-            insetAnimationCurve: Curves.fastLinearToSlowEaseIn , insetAnimationDuration: const Duration(seconds: 3),
+              insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
+              insetAnimationDuration: const Duration(seconds: 3),
               elevation: 20,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
@@ -104,9 +107,10 @@ class _AuthScreenState extends State<AuthScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      
                         const ConnectWalletDialogTitle(),
                         Container(
+                                                      height: 40,
+
                           margin: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
                           child: CustomTextFormField(
@@ -118,17 +122,15 @@ class _AuthScreenState extends State<AuthScreen>
                             },
                             hintText: 'Enter your Meta Musk ID',
                             focusColor: ColorConstants.greenPantone,
-                              
                             suffix: IconButton(
                                 onPressed: () {
                                   _metaMuskIdController!.clear();
                                 },
-                                icon: const Icon( 
+                                icon: const Icon(
                                   Icons.clear,
                                   color: Colors.black,
                                 )),
                             controller: _metaMuskIdController!,
-                            height: 40,
                           ),
                         ),
                         Container(
@@ -179,33 +181,36 @@ class _AuthScreenState extends State<AuthScreen>
                           ),
                         ),
                         Center(
-                          child: CustomElevatedButton(
-                            title: 'Connect',
-                            titleStyle: const TextStyle(color: Colors.white),
-                            buttonOutlineColor: ColorConstants.greenPantone,
-                            height: 40,
-                            width: 250,
-                            elevation: 0.5,
-                            overlayColor: MaterialStateProperty.all<Color>(
-                            ColorConstants.someRockGreen),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                          ColorConstants.greenPantone,
-                            ),
-                            onPressed:
-                            validateMetaMuskID(_metaMuskIdController!.text)
-                                ? () {
-                                    //TODO: Connect to MetaMusk.......
-                                    Future.delayed(
-                                        const Duration(seconds: 10), (() {
-                                                                                Navigator.pop(context);
+                          child: Container(
+                              height: 40,
+                              width: 250,
+                            child: CustomElevatedButton(
+                              title: 'Connect',
+                              titleStyle: const TextStyle(color: Colors.white),
+                              buttonOutlineColor: ColorConstants.greenPantone,
+                            
+                              elevation: 0.5,
+                              overlayColor: MaterialStateProperty.all<Color>(
+                                  ColorConstants.someRockGreen),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                ColorConstants.greenPantone,
+                              ),
+                              onPressed:
+                                  validateMetaMuskID(_metaMuskIdController!.text)
+                                      ? () {
+                                          //TODO: Connect to MetaMusk.......
+                                          Future.delayed(
+                                              const Duration(seconds: 10), (() {
+                                            Navigator.pop(context);
 
-                                      Provider.of<AppStateManager>(context,
-                                              listen: false)
-                                          .setIsLoggedIn(true);
-                                      context.go('/');
-                                    }));
-                                  }
-                                : null,
+                                            Provider.of<AppStateManager>(context,
+                                                    listen: false)
+                                                .setIsLoggedIn(true);
+                                            context.go('/');
+                                          }));
+                                        }
+                                      : null,
+                            ),
                           ),
                         ),
                       ],
@@ -217,7 +222,7 @@ class _AuthScreenState extends State<AuthScreen>
   }
 
   bool validateMetaMuskID(String metaMuskId) {
-    //TODO: Write Metamusk Id validation code
+    //TODO: Write Metamusk Id validation code..
     return true;
   }
 }
@@ -230,46 +235,43 @@ class WelcomeMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-     children: [
+      children: [
         Padding(
-       padding:
-           const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-       child: Center(
-         child: Text(
-           "Discover, buy and sell quality Agro-products and services.",
-           style: Theme.of(context)
-               .textTheme
-               .headline3!
-               .copyWith(fontSize: 22, fontWeight: FontWeight.w700),
-         ),
-       ),
-     ),
-     Padding(
-       padding:
-           const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-       child: Center(
-         child: Text(
-           "AgriMart is the world's and largest\ndigital Argo-product marketplace.",
-           style: Theme.of(context)
-               .textTheme
-               .headline3!
-               .copyWith(fontWeight: FontWeight.w500, fontSize: 15),
-         ),
-       ),
-     ),
-     Padding(
-       padding:
-           const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-       child: Text(
-         "You need an ethereum wallet to use AgriMart",
-         style: Theme.of(context).textTheme.headline3!.copyWith(
-             fontSize: 14,
-             fontStyle: FontStyle.italic,
-             color: Colors.blue.shade900,
-             fontWeight: FontWeight.w600),
-       ),
-     ),
-     ],
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+          child: Center(
+            child: Text(
+              "Discover, buy and sell quality Agro-products and services.",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3!
+                  .copyWith(fontSize: 22, fontWeight: FontWeight.w700),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          child: Center(
+            child: Text(
+              "AgriMart is the world's and largest\ndigital Argo-product marketplace.",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3!
+                  .copyWith(fontWeight: FontWeight.w500, fontSize: 15),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            "You need an ethereum wallet to use AgriMart",
+            style: Theme.of(context).textTheme.headline3!.copyWith(
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                color: Colors.blue.shade900,
+                fontWeight: FontWeight.w600),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -305,16 +307,14 @@ class ConnectWalletDialogTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       alignment: Alignment.center,
       child: Text(
         "Connect Wallet ",
         style: Theme.of(context)
             .textTheme
             .headline3!
-            .copyWith(
-                fontSize: 18, fontWeight: FontWeight.w600),
+            .copyWith(fontSize: 18, fontWeight: FontWeight.w600),
       ),
     );
   }

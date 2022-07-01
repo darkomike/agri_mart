@@ -37,6 +37,15 @@ class AppDrawer extends StatelessWidget {
               context.goNamed('orders');
             },
           ),
+            const Divider(
+            height: 5,
+          ),
+           CustomListTile(
+            title: 'Products',
+            onTap: () {
+              context.goNamed('products');
+            },
+          ),
           const Divider(
             height: 5,
           ),

@@ -1,3 +1,4 @@
+import 'package:block_agri_mart/domain/provider/product_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => appStateManager),
         ChangeNotifierProvider(create: (context) => homeStateManager),
+        ChangeNotifierProvider(create: (context) => productStateManager),
       ],
       child: Consumer<AppStateManager>(builder: ((context, appState, child) {
         ThemeData theme;

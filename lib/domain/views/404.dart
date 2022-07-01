@@ -30,7 +30,7 @@ class Page404 extends StatelessWidget {
               
                 child: Text(
                     
-                    "Oops, page not found!!!",
+                    "Oops, something went wrong!!!",
                     style:
                         Theme.of(context).textTheme.headline1!.copyWith(fontSize: 20),
                 )),
