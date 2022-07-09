@@ -34,10 +34,12 @@ class LightTheme {
   static ThemeData light() {
     return ThemeData(
       backgroundColor: Colors.white,
+    
       inputDecorationTheme:
           InputDecorationTheme(fillColor: ColorConstants.someRockGreen),
       primaryColor: ColorConstants.someRockGreen,
       accentColor: ColorConstants.someRockGreen,
+      
       scaffoldBackgroundColor: ColorConstants.scaffoldBackgroundColorL,
       fontFamily: 'Poppins',
       iconTheme: const IconThemeData(
@@ -46,6 +48,7 @@ class LightTheme {
       textTheme: lightTextTheme,
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
+          
           titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
           iconTheme: IconThemeData(color: Colors.black),
           elevation: 1),

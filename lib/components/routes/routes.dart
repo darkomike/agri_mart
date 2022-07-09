@@ -1,16 +1,17 @@
-import 'package:block_agri_mart/domain/views/add_product.dart';
-import 'package:block_agri_mart/domain/views/products.dart';
+import 'package:block_agri_mart/domain/products/components/add_product.dart';
+import 'package:block_agri_mart/domain/products/products.dart';
 import 'package:go_router/go_router.dart';
-import '../../domain/provider/app_provider.dart';
-import '../../domain/views/404.dart';
-import '../../domain/views/auth.dart';
-import '../../domain/views/cart.dart';
-import '../../domain/views/home.dart';
-import '../../domain/views/notification.dart';
-import '../../domain/views/orders.dart';
-import '../../domain/views/profile.dart';
-import '../../domain/views/requests.dart';
-import '../../domain/views/transactions.dart';
+import '../../domain/details/details.dart';
+import '../provider/app_provider.dart';
+import '../404.dart';
+import '../../domain/auth/auth.dart';
+import '../../domain/cart/cart.dart';
+import '../../domain/home/home.dart';
+import '../../domain/notifications/notification.dart';
+import '../../domain/orders/orders.dart';
+import '../../domain/profile/profile.dart';
+import '../../domain/requests/requests.dart';
+import '../../domain/transactions/transactions.dart';
 
 final appRouter = GoRouter(
     initialLocation: '/auth',
@@ -33,33 +34,30 @@ final appRouter = GoRouter(
     },
     errorBuilder: (context, state) => const Page404());
 
-
-
-
 final authRouter = GoRoute(
     name: 'auth',
     path: '/auth',
     builder: (context, state) => const AuthScreen());
-
 
 final cartRouter = GoRoute(
     name: 'cart',
     path: 'cart',
     builder: (context, state) => const CartScreen());
 
+final detailsRouter = GoRoute(
+    name: 'details',
+    path: 'details',
+    builder: (context, state) => const DetailsScreen());
 
 final ordersRouter = GoRoute(
     name: 'orders',
     path: 'orders',
     builder: (context, state) => const OrdersScreen());
 
-
-
 final profileRouter = GoRoute(
     name: 'profile',
     path: 'profile',
     builder: (context, state) => const ProfileScreen());
-
 
 final productsRouter = GoRoute(
     name: 'products',
@@ -67,15 +65,10 @@ final productsRouter = GoRoute(
     routes: [addProductRouter],
     builder: (context, state) => const ProductsScreen());
 
-
 final addProductRouter = GoRoute(
     name: 'add_product',
     path: 'add_product',
     builder: (context, state) => const AddProductScreen());
-
-
-
-
 
 final notificationsRouter = GoRoute(
     name: 'notifications',
@@ -83,21 +76,24 @@ final notificationsRouter = GoRoute(
     builder: (context, state) => const NotificationPage());
 
 final homeRouter = GoRoute(
-    name: 'home', path: '/', 
-    routes: [profileRouter,notificationsRouter, ordersRouter, transactionsRouter, requestsRouter, productsRouter, cartRouter ],
-    builder: (context, state) => const HomeScreen())
-    
-    ;
-
-
-
+    name: 'home',
+    path: '/',
+    routes: [
+      profileRouter,
+      notificationsRouter,
+      ordersRouter,
+      transactionsRouter,
+      requestsRouter,
+      productsRouter,
+      detailsRouter,
+      cartRouter
+    ],
+    builder: (context, state) => const HomeScreen());
 
 final requestsRouter = GoRoute(
     name: 'requests',
     path: 'requests',
     builder: (context, state) => const RequestsScreen());
-
-
 
 final transactionsRouter = GoRoute(
     name: 'transactions',
