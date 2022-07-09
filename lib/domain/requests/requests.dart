@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../components/constants/assets_constant.dart';
+import '../appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
 
 class RequestsScreen extends StatefulWidget {
@@ -20,39 +21,8 @@ class _RequestsScreenState extends State<RequestsScreen> {
       key: _scaffoldKey,
 
       drawer: const AppDrawer(),
-      appBar: AppBar(
-        // scrolledUnderElevation: 5,
-          elevation: 0.0,
-          leading: SizedBox(
-            height: 40,
-            width: 40,
-            child: IconButton(
-              tooltip: "Open Drawer",
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          actions: [
-            GestureDetector(
-              onTap: () {
-                //TODO: GO to profile...
-                context.goNamed('profile');
+                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Requests',),
 
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage(AssetsConstant.profilePic2),
-                ),
-              ),
-            )
-          ],
-          title:  Text('Requests',
-          style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 22),
-          )),
 
       body: Center(
         child: Text(

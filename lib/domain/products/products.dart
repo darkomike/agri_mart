@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -14,11 +15,15 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
       drawer: const AppDrawer(),
+                  appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products',),
+
       floatingActionButton:  Provider.of<ProductStateManager>(context).totalProducts == 0 ? const SizedBox(): FloatingActionButton(
           onPressed: () {
             context.goNamed('add_product');

@@ -1,6 +1,7 @@
 import 'package:block_agri_mart/components/constants/assets_constant.dart';
 import 'package:block_agri_mart/components/constants/text_constant.dart';
 import 'package:block_agri_mart/components/theme/theme.dart';
+import 'package:block_agri_mart/domain/appbar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -12,6 +13,9 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   TextEditingController? _itemQuantityController;
+
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   
 
   @override
@@ -30,12 +34,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        elevation: 0,
-      ),
+      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '',),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -197,7 +196,7 @@ class ItemQuantity extends StatelessWidget {
         //     )),
 
         MaterialButton(
-          child: Text("", style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),),
+          child: Text("0", style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),),
            onPressed: (){}, 
            ),
             

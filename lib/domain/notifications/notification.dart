@@ -3,6 +3,7 @@ import 'package:block_agri_mart/components/constants/text_constant.dart';
 import 'package:block_agri_mart/components/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -21,77 +22,8 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const AppDrawer(),
-      appBar: AppBar(
-          // scrolledUnderElevation: 5,
-          elevation: 0.0,
-          leading: SizedBox(
-            height: 40,
-            width: 40,
-            child: IconButton(
-              tooltip: "Open Drawer",
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(
-                  height: 40,
-                  child: Stack(
-                    children: [
-                      IconButton(
-                        tooltip: "Open Cart",
-                        icon: const Icon(Icons.shopping_cart),
-                        onPressed: () {
-                          //TODO: GO to notifications
-                        },
-                      ),
-                      Positioned(
-                        left: 2,
-                        top: 2,
-                        child: Container(
-                            // height: 15,
-                            //   width: 15,
-                            padding: const EdgeInsets.only(left: 4, right: 4),
-                            decoration: BoxDecoration(
-                                color: ColorConstants.someRockGreen,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: const Text(
-                              "54",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400),
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    //TODO: GO to profile...
-                    context.goNamed('profile');
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(AssetsConstant.profilePic2),
-                    ),
-                  ),
-                )
-              ],
-            )
-          ],
-          title: Text(
-            'Notifications',
-            style:
-                Theme.of(context).textTheme.headline2!.copyWith(fontSize: 22),
-          )),
+            appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications',),
+
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: ListView(
