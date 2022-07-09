@@ -180,7 +180,7 @@ class ItemQuantity extends StatelessWidget {
         ),
         const SizedBox(
           width: 5,
-        ),
+        ), 
         // Container(
         //     height: 40,
         //     width: 60,
