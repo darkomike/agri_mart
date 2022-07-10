@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       key: _scaffoldKey,
-      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '',),
+      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '', showProfilePic: true, onTransparentBackground: false,),
       drawer: const AppDrawer(),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

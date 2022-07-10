@@ -2,7 +2,9 @@ import 'package:block_agri_mart/components/constants/assets_constant.dart';
 import 'package:block_agri_mart/components/constants/text_constant.dart';
 import 'package:block_agri_mart/components/theme/theme.dart';
 import 'package:block_agri_mart/domain/appbar/custom_app_bar.dart';
+import 'package:block_agri_mart/domain/drawer/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -34,9 +36,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '',),
+      drawer: const AppDrawer(),
+      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '', showProfilePic: true,onTransparentBackground: true),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
+      key: _scaffoldKey,
       body: Stack(
         children: [
           Positioned(
@@ -268,7 +272,9 @@ class DetailsUpper extends StatelessWidget {
       bottom: data.size.height / 6.5,
       left: 10,
       child: MaterialButton(
-        onPressed: () {},
+        onPressed: () {
+          context.goNamed('profile');
+        },
         child: Container(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -279,7 +285,7 @@ class DetailsUpper extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(AssetsConstant.profilePic2),
+                  backgroundImage: AssetImage(AssetsConstant.profilePic1),
                 ),
                 const SizedBox(
                   width: 10,

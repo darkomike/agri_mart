@@ -21,8 +21,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
+      key: _scaffoldKey,
       drawer: const AppDrawer(),
-                  appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products',),
+                  appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products', showProfilePic: true,onTransparentBackground: false),
 
       floatingActionButton:  Provider.of<ProductStateManager>(context).totalProducts == 0 ? const SizedBox(): FloatingActionButton(
           onPressed: () {

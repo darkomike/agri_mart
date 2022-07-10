@@ -21,7 +21,7 @@ class _RequestsScreenState extends State<RequestsScreen> {
       key: _scaffoldKey,
 
       drawer: const AppDrawer(),
-                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Requests',),
+                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Requests', showProfilePic: true,onTransparentBackground: false),
 
 
       body: Center(

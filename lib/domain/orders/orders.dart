@@ -21,7 +21,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
     return Scaffold(
       key: _scaffoldKey,
             drawer: const AppDrawer(),
-                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: 'Orders',),
+                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: 'Orders', showProfilePic: true,onTransparentBackground: false),
 
 
       body: Center(

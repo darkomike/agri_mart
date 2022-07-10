@@ -19,11 +19,15 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            drawer: const AppDrawer(),
+      drawer: const AppDrawer(),
       key: _scaffoldKey,
-                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Transactions',),
-
-
+      appBar: CustomAppBar(
+          scaffoldKey: _scaffoldKey,
+          showCart: true,
+          showNotification: false,
+          title: 'Transactions',
+          showProfilePic: true,
+          onTransparentBackground: false),
       body: Center(
         child: Text(
           "Transactions",

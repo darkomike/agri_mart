@@ -18,72 +18,66 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       drawer: const AppDrawer(),
       floatingActionButton: Container(
-        height: data.size.height / 7,
+        height: data.size.height / 6,
         // color: Colors.amber,
         child: Column(
           children: [
-            MaterialButton(
-              elevation: 20,
-              color: ColorConstants.someRockGreen,
-              minWidth: 40,
-              height: 40,
-              shape: RoundedRectangleBorder(
-                  side:
-                      BorderSide(color: ColorConstants.greenPantone, width: 2),
-                  borderRadius: BorderRadius.circular(30)),
-              onPressed: () {
-                //TODO: Make payment function
-              },
-              child: const Icon(
-                Icons.payment,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
+            FloatingActionButton(
+                elevation: 10,
+                backgroundColor: ColorConstants.someRockGreen,
+                shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: ColorConstants.greenPantone, width: 2),
+                    borderRadius: BorderRadius.circular(30)),
+                child: const Icon(
+                  Icons.payment,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  //TODO: Make Payment func...
+                  _showPaymentDialog(context);
+                }),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MaterialButton(
-                  elevation: 10,
-                  color: ColorConstants.someRockGreen,
-                  minWidth: 40,
-                  height: 40,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: ColorConstants.greenPantone, width: 2),
-                      borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    //TODO: GO to home
-                    context.goNamed('home');
-                  },
-                  child: const Icon(
-                    Icons.home,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
+                FloatingActionButton(
+
+                    elevation: 10,
+                    backgroundColor: ColorConstants.someRockGreen,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: ColorConstants.greenPantone, width: 2),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: const Icon(
+                      Icons.home,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      //TODO: Go to home...
+                      context.goNamed('home');
+                    }),
                 SizedBox(
                   width: data.size.width / 4,
                 ),
-                MaterialButton(
-                  elevation: 10,
-                  color: ColorConstants.someRockGreen,
-                  minWidth: 40,
-                  height: 40,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: ColorConstants.greenPantone, width: 2),
-                      borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {
-                    //TODO: Go to Profile
-                    context.goNamed('profile');
-                  },
-                  child: const Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
+                FloatingActionButton(
+                    elevation: 10,
+                    backgroundColor: ColorConstants.someRockGreen,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            color: ColorConstants.greenPantone, width: 2),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: const Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      ///Go to profile
+                      context.goNamed('profile');
+
+                    }),
               ],
             )
           ],
@@ -98,4 +92,6 @@ class _CartScreenState extends State<CartScreen> {
       ),
     );
   }
+
+  Future<dynamic> _showPaymentDialog(BuildContext context) => showDialog(context: context, builder: (context)=> Dialog());
 }

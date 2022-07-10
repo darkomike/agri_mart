@@ -22,7 +22,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const AppDrawer(),
-            appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications',),
+            appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications', showProfilePic: true,onTransparentBackground: false),
 
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
