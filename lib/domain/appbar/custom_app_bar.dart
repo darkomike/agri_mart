@@ -84,7 +84,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 22),
         ));
   }
-}
+} 
 
 class ProfileIcon extends StatelessWidget {
   const ProfileIcon({
