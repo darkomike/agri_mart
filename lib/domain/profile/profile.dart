@@ -1,11 +1,9 @@
-import 'package:block_agri_mart/components/constants/assets_constant.dart';
-import 'package:block_agri_mart/components/constants/text_constant.dart';
-import 'package:block_agri_mart/components/theme/theme.dart';
-import 'package:block_agri_mart/domain/appbar/empty_app_bar.dart';
-import 'package:block_agri_mart/domain/drawer/drawer.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../appbar/custom_app_bar.dart';
+
+import '../../components/components.dart';
+import '../drawer/drawer.dart';
+import '../nav/appbar/custom_app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -17,15 +15,13 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
   @override
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
-      drawer: const AppDrawer(),
       key: _scaffoldKey,
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         scaffoldKey: _scaffoldKey,
         showCart: true,
         showNotification: true,
@@ -72,16 +68,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Positioned(
                     left: 10,
                     bottom: 5,
-                    child: Container(
-                      height: 80,
-                      width: 80,
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(90),
-                          color: Colors.white),
-                      child: CircleAvatar(
-                          backgroundImage:
-                              AssetImage(AssetsConstant.profilePic2)),
+                    child: Hero(
+                      tag: 'profile',
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90),
+                            color: Colors.white),
+                        child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage(AssetsConstant.profilePic2)),
+                      ),
                     ),
                   ),
                   Positioned(
@@ -241,6 +240,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.only(top: 5),
               height: data.size.height - 140,
               child: PageView(
+                physics: const ClampingScrollPhysics(),
+                allowImplicitScrolling: true,
+                pageSnapping: true,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 children: [
                   Container(
                     color: Colors.teal,
@@ -249,21 +252,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Text("No Purchases"),
                     ),
                   ),
-                    Container(
+                  Container(
                     color: Colors.red,
                     height: data.size.height - 120,
                     child: const Center(
                       child: Text("No Orders"),
                     ),
                   ),
-                   Container(
+                  Container(
                     color: Colors.blue,
                     height: data.size.height - 120,
                     child: const Center(
                       child: Text("No Requests"),
                     ),
                   ),
-                   Container(
+                  Container(
                     color: Colors.indigoAccent,
                     height: data.size.height - 120,
                     child: const Center(

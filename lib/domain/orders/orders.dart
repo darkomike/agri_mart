@@ -1,9 +1,7 @@
+import 'package:block_agri_mart/components/components.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../components/constants/assets_constant.dart';
-import '../../components/theme/color_constant.dart';
-import '../appbar/custom_app_bar.dart';
+import '../nav/appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
 
 class OrdersScreen extends StatefulWidget {
@@ -14,21 +12,69 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: ListView.separated(
+        itemCount: 20,
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+        return  OrderCard(
+              body: TextConstant.dummyText1,
+              time: '23:34',
+              title: 'Order title');
+        },
+        separatorBuilder: (context, index) {
+          return const Divider(
+            height: 4,
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+
+class OrderCard extends StatelessWidget {
+  const OrderCard({
+    required this.body,
+    required this.time,
+    required this.title,
+    this.onTap,
+    Key? key,
+  }) : super(key: key);
+
+  final void Function()? onTap;
+  final String time;
+  final String title;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-            drawer: const AppDrawer(),
-                 appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: 'Orders', showProfilePic: true,onTransparentBackground: false),
-
-
-      body: Center(
-        child: Text(
-          "Orders",
-          style: Theme.of(context).textTheme.headline3,
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: ColorConstants.someRockGreen,
+        // foregroundColor: ColorConstants.someRockGreen,
+        child: const Text(
+          "O",
+          style: TextStyle(color: Colors.white),
         ),
+      ),
+      onTap: onTap,
+      trailing: Text(
+        time,
+        style: const TextStyle(fontSize: 12),
+      ),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),
+      ),
+      subtitle: Text(
+        body,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

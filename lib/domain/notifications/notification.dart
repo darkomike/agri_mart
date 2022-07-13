@@ -1,9 +1,7 @@
-import 'package:block_agri_mart/components/constants/assets_constant.dart';
-import 'package:block_agri_mart/components/constants/text_constant.dart';
-import 'package:block_agri_mart/components/theme/theme.dart';
+
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../appbar/custom_app_bar.dart';
+import '../../components/components.dart';
+import '../nav/appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -21,27 +19,27 @@ class _NotificationPageState extends State<NotificationPage> {
     final data = MediaQuery.of(context);
     return Scaffold(
       key: _scaffoldKey,
-      drawer: const AppDrawer(),
             appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications', showProfilePic: true,onTransparentBackground: false),
 
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: ListView(
-          key: UniqueKey(),
-          physics: const BouncingScrollPhysics(),
-          children: [
-            NotificationCard(
-              title: 'Notification title',
+      color: Colors.white,
+      child: ListView.separated(
+        itemCount: 20,
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (context, index) {
+        return  NotificationCard(
               body: TextConstant.dummyText1,
-              time: '12:30',
-              onTap: () {
-                showNotificationContent(context, data);
-              },
-            ),
-           
-          ],
-        ),
+              time: '23:34',
+              title: 'Request title');
+        },
+        separatorBuilder: (context, index) {
+          return const Divider(
+            height: 4,
+          );
+        },
       ),
+    )
     );
   }
 

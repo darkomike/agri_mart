@@ -1,11 +1,9 @@
-import 'package:block_agri_mart/components/theme/color_constant.dart';
-import 'package:block_agri_mart/components/widgets/custom_textfeild.dart';
-import 'package:block_agri_mart/components/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import '../../components/widgets/custom_elevated_button.dart';
+
+import '../../components/components.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

@@ -1,10 +1,8 @@
-import 'package:block_agri_mart/components/constants/assets_constant.dart';
-import 'package:block_agri_mart/components/constants/text_constant.dart';
-import 'package:block_agri_mart/components/theme/theme.dart';
-import 'package:block_agri_mart/domain/appbar/custom_app_bar.dart';
-import 'package:block_agri_mart/domain/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../components/components.dart';
+import '../domain.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key}) : super(key: key);

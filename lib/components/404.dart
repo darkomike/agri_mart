@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 class Page404 extends StatelessWidget {
   const Page404({Key? key}) : super(key: key);
 

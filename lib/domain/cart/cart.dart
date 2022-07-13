@@ -1,8 +1,10 @@
-import 'package:block_agri_mart/components/theme/color_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../components/components.dart';
+import '../domain.dart';
 
-import '../drawer/drawer.dart';
+
+export './provider/cart_provider.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -17,12 +19,12 @@ class _CartScreenState extends State<CartScreen> {
     final data = MediaQuery.of(context);
     return Scaffold(
       drawer: const AppDrawer(),
-      floatingActionButton: Container(
+      bottomNavigationBar: SizedBox(
         height: data.size.height / 6,
-        // color: Colors.amber,
         child: Column(
           children: [
             FloatingActionButton(
+              heroTag: 'payment',
                 elevation: 10,
                 backgroundColor: ColorConstants.someRockGreen,
                 shape: RoundedRectangleBorder(
@@ -42,7 +44,7 @@ class _CartScreenState extends State<CartScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FloatingActionButton(
-
+heroTag: 'home',
                     elevation: 10,
                     backgroundColor: ColorConstants.someRockGreen,
                     shape: RoundedRectangleBorder(
@@ -62,6 +64,7 @@ class _CartScreenState extends State<CartScreen> {
                   width: data.size.width / 4,
                 ),
                 FloatingActionButton(
+                  heroTag: 'profile',
                     elevation: 10,
                     backgroundColor: ColorConstants.someRockGreen,
                     shape: RoundedRectangleBorder(
@@ -84,14 +87,27 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Center(
-        child: Text(
-          "Cart",
-          style: Theme.of(context).textTheme.headline3,
+      body: SafeArea(
+      child: Center(
+          child: Text(
+            "Cart",
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
       ),
     );
   }
 
   Future<dynamic> _showPaymentDialog(BuildContext context) => showDialog(context: context, builder: (context)=> Dialog());
+}
+
+
+
+class EmptyCart extends StatelessWidget {
+  const EmptyCart({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }

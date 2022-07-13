@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
 import '../../main.dart';
 
-class AppStateManager extends ChangeNotifier {
+class AppStateManager with ChangeNotifier {
   bool _loggedIn = prefs.getBool('loggedIn')!;
   bool _darkModeOn = false;
-  String _categorySelectedIs = "All";
+  String _navigationBottomSelected = 'home';
   String _userType = prefs.getString('userType')!;
 
   bool get loggedIn => _loggedIn;
   bool get darkModeOn => _darkModeOn;
-  String get categorySelectedIs => _categorySelectedIs;
   String get userType => _userType;
+  String get navigationBottomSelected => _navigationBottomSelected;
 
   setIsLoggedIn(bool isLoggedIn) {
     prefs.setBool('loggedIn', isLoggedIn);
@@ -27,8 +27,8 @@ class AppStateManager extends ChangeNotifier {
     setIsDarkModeOn(value);
   }
 
-  changeCategorySelected(String value) {
-    _categorySelectedIs = value;
+  changeNavigationBottomSelected(String value) {
+    _navigationBottomSelected = value;
     notifyListeners();
   }
 

@@ -6,12 +6,15 @@ import 'category_list.dart';
 class Categories extends StatelessWidget {
   const Categories({
     Key? key,
-    required this.width,
+    required this.width, required this.controller,
     required this.height,
   }) : super(key: key);
 
   final double width;
   final double height;
+  final ScrollController controller;
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,6 +37,7 @@ class Categories extends StatelessWidget {
           ),
           CategoryList(
             width: width,
+            controller: controller,
             height: height,
           )
         ],

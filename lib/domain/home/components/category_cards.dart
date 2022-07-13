@@ -21,7 +21,7 @@ class CategoryCards extends StatelessWidget {
           title: 'All',
         ),
         const SizedBox(
-          width: 4,
+          width: 6,
         ),
         CategorySelectionCard(
           onPressed: () {
@@ -31,7 +31,7 @@ class CategoryCards extends StatelessWidget {
           title: 'Fruits',
         ),
         const SizedBox(
-          width: 4,
+          width: 6,
         ),
         CategorySelectionCard(
           onPressed: () {
@@ -41,7 +41,7 @@ class CategoryCards extends StatelessWidget {
           title: 'Vegetables',
         ),
         const SizedBox(
-          width: 4,
+          width: 6,
         ),
         CategorySelectionCard(
           onPressed: () {
@@ -51,7 +51,7 @@ class CategoryCards extends StatelessWidget {
           title: 'Cereals',
         ),
         const SizedBox(
-          width: 4,
+          width: 6,
         ),
         CategorySelectionCard(
           onPressed: () {

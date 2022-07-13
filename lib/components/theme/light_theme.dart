@@ -33,13 +33,22 @@ class LightTheme {
   // LIGHT THEME
   static ThemeData light() {
     return ThemeData(
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: ColorConstants.someRockGreen,
+          selectedIconTheme: const IconThemeData(color: Colors.white, size: 16),
+          unselectedIconTheme: const IconThemeData(color: Colors.white, size: 14),
+          selectedItemColor: Colors.white,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w300),
+          showSelectedLabels: true,showUnselectedLabels: true,
+          elevation: 10,
+
+          ),
       backgroundColor: Colors.white,
-    
       inputDecorationTheme:
           InputDecorationTheme(fillColor: ColorConstants.someRockGreen),
       primaryColor: ColorConstants.someRockGreen,
       accentColor: ColorConstants.someRockGreen,
-      
       scaffoldBackgroundColor: ColorConstants.scaffoldBackgroundColorL,
       fontFamily: 'Poppins',
       iconTheme: const IconThemeData(
@@ -48,7 +57,6 @@ class LightTheme {
       textTheme: lightTextTheme,
       appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
-          
           titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
           iconTheme: IconThemeData(color: Colors.black),
           elevation: 1),

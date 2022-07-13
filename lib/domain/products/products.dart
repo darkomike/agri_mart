@@ -1,11 +1,14 @@
-import 'package:block_agri_mart/components/theme/color_constant.dart';
+
 import 'package:block_agri_mart/domain/products/provider/product_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-import '../appbar/custom_app_bar.dart';
+import '../nav/appbar/custom_app_bar.dart';
 import '../drawer/drawer.dart';
+import 'package:go_router/go_router.dart';
+
+export './provider/product_provider.dart';
+export './components/components.dart';
+
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);
@@ -25,7 +28,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       drawer: const AppDrawer(),
                   appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products', showProfilePic: true,onTransparentBackground: false),
 
-      floatingActionButton:  Provider.of<ProductStateManager>(context).totalProducts == 0 ? const SizedBox(): FloatingActionButton(
+      floatingActionButton:  context.watch<ProductStateManager>().totalProducts == 0 ? const SizedBox(): FloatingActionButton(
           onPressed: () {
             context.goNamed('add_product');
           },
@@ -51,7 +54,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     height: 10,
                   ),
                   Text(
-                    "No Products available",
+                    "No products available",
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   const SizedBox(

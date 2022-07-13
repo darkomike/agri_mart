@@ -7,19 +7,21 @@ import 'category_product_card.dart';
 class CategoryList extends StatelessWidget {
   const CategoryList({
     Key? key,
-    required this.width,
+    required this.width, required this.controller,
     required this.height,
   }) : super(key: key);
 
   final double width;
   final double height;
+  final ScrollController controller;
   // final String categoryType;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
-      height: height - 200,
+      height: height - 170, 
       child: GridView(
+        controller: controller,
         shrinkWrap: true,
         padding: const EdgeInsets.only(bottom: 10, right: 10, top: 10),
         physics: const BouncingScrollPhysics(),
@@ -56,6 +58,32 @@ class CategoryList extends StatelessWidget {
             },
           ),
           CategoryProductCard(
+            itemImageUrl: AssetsConstant.cucumber,
+            itemTitle: 'Cucumber',
+            itemPrice: "23.45",
+            itemSellerImageUrl: AssetsConstant.profilePic2,
+            onPressedAddCart: () {
+              print("Add to Cart");
+            },
+            onPressedDetails: () {
+                            GoRouter.of(context).goNamed('details');
+
+              print("Go to Details Page");
+            },
+          ),  CategoryProductCard(
+            itemImageUrl: AssetsConstant.cucumber,
+            itemTitle: 'Cucumber',
+            itemPrice: "23.45",
+            itemSellerImageUrl: AssetsConstant.profilePic2,
+            onPressedAddCart: () {
+              print("Add to Cart");
+            },
+            onPressedDetails: () {
+                            GoRouter.of(context).goNamed('details');
+
+              print("Go to Details Page");
+            },
+          ),  CategoryProductCard(
             itemImageUrl: AssetsConstant.cucumber,
             itemTitle: 'Cucumber',
             itemPrice: "23.45",
