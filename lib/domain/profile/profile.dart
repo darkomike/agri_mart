@@ -22,12 +22,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
       appBar: CustomAppBar(
+                      isHome: false,
+
         scaffoldKey: _scaffoldKey,
         showCart: true,
-        showNotification: true,
-        onTransparentBackground: false,
+        showNotification: false,
+        onTransparentBackground: true,
         showProfilePic: false,
-        title: 'Profile',
+        title: '',
       ),
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),

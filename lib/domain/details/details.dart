@@ -35,7 +35,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
     final data = MediaQuery.of(context);
     return Scaffold(
       drawer: const AppDrawer(),
-      appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '', showProfilePic: true,onTransparentBackground: true),
+      appBar: CustomAppBar(
+                      isHome: false,
+
+        scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '', showProfilePic: true,onTransparentBackground: true),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,

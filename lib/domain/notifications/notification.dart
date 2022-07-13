@@ -19,7 +19,9 @@ class _NotificationPageState extends State<NotificationPage> {
     final data = MediaQuery.of(context);
     return Scaffold(
       key: _scaffoldKey,
-            appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications', showProfilePic: true,onTransparentBackground: false),
+            appBar: CustomAppBar(
+              isHome: false,
+              scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications', showProfilePic: true,onTransparentBackground: false),
 
       body: Container(
       color: Colors.white,

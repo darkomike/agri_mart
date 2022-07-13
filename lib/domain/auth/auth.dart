@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/components.dart';
+import 'components/connect_to_wallet.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -14,210 +15,143 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
-  String? _selectedTypeSelected;
-  final List<String> _userTypes = ["Seller", "Buyer"];
-  TextEditingController? _metaMuskIdController;
-  bool connect = false;
-
+  late TextEditingController _metaMuskController;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  late PageController _pageController;
 
   @override
   void initState() {
-    _selectedTypeSelected = "Seller";
-    _metaMuskIdController = TextEditingController();
     super.initState();
+    _metaMuskController = TextEditingController();
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    _metaMuskIdController!.dispose();
     super.dispose();
+    _metaMuskController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     print("Is Logged In: ${appStateManager.loggedIn}");
 
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      key: _scaffoldKey,
-      resizeToAvoidBottomInset: false,
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          final width = constraints.maxWidth;
-          final height = constraints.maxHeight;
-
-          print("Height in layout: ${constraints.maxHeight}");
-          print("Width in layout: ${constraints.maxWidth}");
-          return Container(
-            decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                LottieWidget(width: width, height: height),
-                const WelcomeMessage(),
-                const SizedBox(height: 10),
-                MaterialButton(
-                  onPressed: () {
-                    _showConnectDialog(context);
-                  },
-                  child: Text(
-                    "Connect to Wallet",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2!
-                        .copyWith(color: Colors.white, fontSize: 16),
-                  ),
-                  height: 50,
-                  color: ColorConstants.greenPantone,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                  minWidth: width - 30,
-                  elevation: 2,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Future<dynamic> _showConnectDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-              insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
-              insetAnimationDuration: const Duration(milliseconds: 1500),
-              elevation: 20,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  return Container(
-                    height: 270,
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.8),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const ConnectWalletDialogTitle(),
-                        Container(
-                          height: 40,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          child: CustomTextFormField(
-                            autofocus: false,
-                            validator: (value) {
-                              return validateMetaMuskID(value!)
-                                  ? null
-                                  : "Invalid ID";
-                            },
-                            hintText: 'Enter your Meta Musk ID',
-                            focusColor: ColorConstants.greenPantone,
-                            suffix: IconButton(
-                                onPressed: () {
-                                  _metaMuskIdController!.clear();
-                                },
-                                icon: const Icon(
-                                  Icons.clear,
-                                  color: Colors.black,
-                                )),
-                            controller: _metaMuskIdController!,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                child: Text(
-                                  "Connect as : ",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 16),
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                height: 35,
-                                width: 100,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                      width: 1.5,
-                                      color: ColorConstants.greenPantone),
-                                ),
-                                child: DropdownButton<String>(
-                                    underline: Container(),
-                                    value: _selectedTypeSelected,
-                                    items: _userTypes.map((String value) {
-                                      return DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,
-                                      );
-                                    }).toList(),
-                                    onChanged: (value) {
-                                      setState(
-                                          () => _selectedTypeSelected = value);
-                                    }),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Center(
-                          child: MaterialButton(
-                            minWidth: 250,
-                            height: 40,
-                            color: ColorConstants.someRockGreen,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            onPressed:
-                                validateMetaMuskID(_metaMuskIdController!.text)
-                                    ? () {
-                                        setState(() => connect = true);
-
-                                        //TODO: Connect to MetaMusk.......
-                                        Future.delayed(
-                                            const Duration(seconds: 10), (() {
-                                          Navigator.pop(context);
-
-                                          Provider.of<AppStateManager>(context,
-                                                  listen: false)
-                                              .setIsLoggedIn(true);
-                                          context.go('/');
-                                        }));
-                                      }
-                                    : null,
-                            child: Text(
-                              connect == true ? 'Connecting...' : 'Connect',
+        key: _scaffoldKey,
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  context.read<AppStateManager>().changeAuthPageIndex(index);
+                },
+                pageSnapping: true,
+                children: [
+                  Container(
+                    child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LottieWidget(
+                                width: width,
+                                height: height,
+                                lottiePath: AssetsConstant.homepageLottie),
+                            Text(
+                              "Welcome to Agrimart",
                               style: Theme.of(context)
                                   .textTheme
                                   .headline3!
-                                  .copyWith(fontSize: 14, color: Colors.white),
+                                  .copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
                             ),
-                          ),
-                        ),
-                      ],
+                          ]),
                     ),
-                  );
-                },
-              ));
-        });
-  }
-
-  bool validateMetaMuskID(String metaMuskId) {
-    //TODO: Write Metamusk Id validation code..
-    return true;
+                  ),
+                  Container(
+                    child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LottieWidget(
+                                width: width,
+                                height: height,
+                                lottiePath: AssetsConstant.networkedDataLottie),
+                            Text(
+                              "Connect with Customers",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3!
+                                  .copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LottieWidget(
+                                width: width,
+                                height: height,
+                                lottiePath: AssetsConstant.networkedDataLottie),
+                            Text(
+                              "Sell your Agro-Produce",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3!
+                                  .copyWith(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
+                            ),
+                          ]),
+                    ),
+                  ),
+                  ConnectToWalletWidget(
+                      textEditingController: _metaMuskController,
+                      height: height,
+                      width: width),
+                ],
+              ),
+              Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: Visibility(
+                    maintainAnimation: true,
+                    maintainState: true,
+                    visible: context.watch<AppStateManager>().authPageIndex == 3
+                        ? false
+                        : true,
+                    child: MaterialButton(
+                      minWidth: 100,
+                      height: 45,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      color: ColorConstants.someRockGreen,
+                      onPressed: () {
+                        print(_pageController.offset);
+                        print(_pageController.initialPage);
+                        _pageController.animateToPage(3,
+                            duration: const  Duration(microseconds: 600),
+                            curve: Curves.ease);
+                      },
+                      child: const Text(
+                        "Skip",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  )),
+            ],
+          ),
+        ));
   }
 }
 
@@ -271,21 +205,23 @@ class WelcomeMessage extends StatelessWidget {
 }
 
 class LottieWidget extends StatelessWidget {
-  const LottieWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-  }) : super(key: key);
+  const LottieWidget(
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.lottiePath})
+      : super(key: key);
 
   final double width;
   final double height;
+  final String lottiePath;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: LottieBuilder.asset(
-        "assets/lottie/two-factor-authentication.json",
+        lottiePath,
         width: width / 1.5,
         height: height / 2.5,
       ),

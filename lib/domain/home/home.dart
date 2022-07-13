@@ -34,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _mainScrollController.dispose();
-    _categoryScrollController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _mainScrollController.dispose();
+  //   _categoryScrollController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: CustomAppBar(
+                        isHome: true,
+
           scaffoldKey: _scaffoldKey,
           showCart: true,
           showNotification: true,
           title: context.watch<AppStateManager>().navigationBottomSelected ==
                   'home'
-              ? ''
+              ? 'AgriMart'
               : capitalize(
                   value: context
                       .watch<AppStateManager>()

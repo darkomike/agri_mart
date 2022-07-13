@@ -7,10 +7,13 @@ class AppStateManager with ChangeNotifier {
   String _navigationBottomSelected = 'home';
   String _userType = prefs.getString('userType')!;
 
+  int _authPageIndex = 0;
+
   bool get loggedIn => _loggedIn;
   bool get darkModeOn => _darkModeOn;
   String get userType => _userType;
   String get navigationBottomSelected => _navigationBottomSelected;
+  int get authPageIndex => _authPageIndex;
 
   setIsLoggedIn(bool isLoggedIn) {
     prefs.setBool('loggedIn', isLoggedIn);
@@ -25,6 +28,11 @@ class AppStateManager with ChangeNotifier {
 
   changeTheme(bool value) {
     setIsDarkModeOn(value);
+  }
+
+  changeAuthPageIndex(int value) {
+    _authPageIndex = value;
+    notifyListeners();
   }
 
   changeNavigationBottomSelected(String value) {

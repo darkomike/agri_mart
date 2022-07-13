@@ -26,7 +26,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const AppDrawer(),
-                  appBar: CustomAppBar(scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products', showProfilePic: true,onTransparentBackground: false),
+                  appBar: CustomAppBar(
+                                  isHome: false,
+
+                    scaffoldKey: _scaffoldKey, showCart: false, showNotification: false, title: 'Products', showProfilePic: true,onTransparentBackground: false),
 
       floatingActionButton:  context.watch<ProductStateManager>().totalProducts == 0 ? const SizedBox(): FloatingActionButton(
           onPressed: () {
