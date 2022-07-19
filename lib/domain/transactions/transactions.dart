@@ -14,19 +14,19 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: ListView.separated(
         itemCount: 20,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-        return  TransactionCard(
+          return TransactionCard(
               body: TextConstant.dummyText1,
               time: '23:34',
               title: 'Transaction title');
         },
         separatorBuilder: (context, index) {
-          return const Divider(
+          return const SizedBox(
             height: 4,
           );
         },
@@ -52,25 +52,31 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      shape: RoundedRectangleBorder(
+        
+      borderRadius: BorderRadius.circular(5)),
+      tileColor: ColorConstants.primaryColor.withOpacity(.2),
       leading: CircleAvatar(
-        backgroundColor: ColorConstants.someRockGreen,
+        backgroundColor: ColorConstants.primaryColor,
         // foregroundColor: ColorConstants.someRockGreen,
         child: const Text(
-          "P",
+          "T",
           style: TextStyle(color: Colors.white),
         ),
       ),
       onTap: onTap,
       trailing: Text(
         time,
-        style: const TextStyle(fontSize: 12),
+        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 10), 
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),
+        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 16),
       ),
       subtitle: Text(
         body,
+                style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 12),
+
         overflow: TextOverflow.ellipsis,
       ),
     );

@@ -19,20 +19,21 @@ class CategorySelectionCard extends StatelessWidget {
     return MaterialButton(
       animationDuration: const Duration(milliseconds: 200),
       height: 40,
-      elevation: title ==
-                      Provider.of<HomeStateManager>(context)
-                          .categorySelectedCard ? 2: 1,
+      elevation:
+          title == Provider.of<HomeStateManager>(context).categorySelectedCard
+              ? 2
+              : 1,
       shape: RoundedRectangleBorder(
           side: BorderSide(
               color: title ==
                       Provider.of<HomeStateManager>(context)
                           .categorySelectedCard
-                  ? ColorConstants.someRockGreen
+                  ? ColorConstants.primaryColor
                   : const Color(0xFFF1F6F2)),
           borderRadius: BorderRadius.circular(5)),
       color:
           title == Provider.of<HomeStateManager>(context).categorySelectedCard
-              ? ColorConstants.someRockGreen
+              ? ColorConstants.primaryColor
               : const Color(0xFFF1F6F2),
       disabledColor: Colors.transparent,
       onPressed: onPressed,

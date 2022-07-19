@@ -16,7 +16,7 @@ class AddProductButton extends StatelessWidget {
         width: data.size.width - 30,
         margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
         child: MaterialButton(
-          color: ColorConstants.someRockGreen,
+          color: ColorConstants.primaryColor,
           height: 50,
           onPressed: () {
             //TODO: Add product function...

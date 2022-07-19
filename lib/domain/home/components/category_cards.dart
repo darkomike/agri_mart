@@ -15,7 +15,7 @@ class CategoryCards extends StatelessWidget {
       children: [
         CategorySelectionCard(
           onPressed: () {
-            Provider.of<HomeStateManager>(context, listen: false)
+           context.read<HomeStateManager>()
                 .updateCategoryCard("All");
           },
           title: 'All',
@@ -25,7 +25,7 @@ class CategoryCards extends StatelessWidget {
         ),
         CategorySelectionCard(
           onPressed: () {
-            Provider.of<HomeStateManager>(context, listen: false)
+           context.read<HomeStateManager>()
                 .updateCategoryCard("Fruits");
           },
           title: 'Fruits',
@@ -35,7 +35,7 @@ class CategoryCards extends StatelessWidget {
         ),
         CategorySelectionCard(
           onPressed: () {
-            Provider.of<HomeStateManager>(context, listen: false)
+            context.read<HomeStateManager>()
                 .updateCategoryCard("Vegetables");
           },
           title: 'Vegetables',
@@ -45,7 +45,7 @@ class CategoryCards extends StatelessWidget {
         ),
         CategorySelectionCard(
           onPressed: () {
-            Provider.of<HomeStateManager>(context, listen: false)
+           context.read<HomeStateManager>()
                 .updateCategoryCard("Cereals");
           },
           title: 'Cereals',
@@ -55,7 +55,7 @@ class CategoryCards extends StatelessWidget {
         ),
         CategorySelectionCard(
           onPressed: () {
-            Provider.of<HomeStateManager>(context, listen: false)
+             context.read<HomeStateManager>()
                 .updateCategoryCard("Poultry");
           },
           title: 'Poultry',

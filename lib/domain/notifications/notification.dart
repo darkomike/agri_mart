@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import '../../components/components.dart';
 import '../nav/appbar/custom_app_bar.dart';
-import '../drawer/drawer.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -18,62 +16,67 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      key: _scaffoldKey,
-            appBar: CustomAppBar(
-              isHome: false,
-              scaffoldKey: _scaffoldKey, showCart: true, showNotification: false, title: 'Notifications', showProfilePic: true,onTransparentBackground: false),
-
-      body: Container(
-      color: Colors.white,
-      child: ListView.separated(
-        itemCount: 20,
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-        return  NotificationCard(
-              body: TextConstant.dummyText1,
-              time: '23:34',
-              title: 'Request title');
-        },
-        separatorBuilder: (context, index) {
-          return const Divider(
-            height: 4,
-          );
-        },
-      ),
-    )
-    );
+        key: _scaffoldKey,
+        appBar: CustomAppBar(
+            isHome: false,
+            scaffoldKey: _scaffoldKey,
+            showCart: true,
+            showNotification: false,
+            title: 'Notifications',
+            showProfilePic: true,
+            onTransparentBackground: false),
+        body: Container(
+          // color: Colors.white,
+          child: ListView.separated(
+            itemCount: 20,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return NotificationCard(
+                  body: TextConstant.dummyText1,
+                  time: '23:34',
+                  title: 'Notication title');
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 4,
+              );
+            },
+          ),
+        ));
   }
 
-  Future<dynamic> showNotificationContent(BuildContext context, MediaQueryData data) {
+  Future<dynamic> showNotificationContent(
+      BuildContext context, MediaQueryData data) {
     return showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      child: Container(
-                        height: data.size.height / 2,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Nofitication Title",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline3!
-                                  .copyWith(fontSize: 18),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  });
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Container(
+              height: data.size.height / 2,
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Column(
+                children: [
+                  Text(
+                    "Nofitication Title",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .copyWith(fontSize: 18),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }
 
 class NotificationCard extends StatelessWidget {
   const NotificationCard({
-    required this.body, required this.time, required this.title,
+    required this.body,
+    required this.time,
+    required this.title,
     this.onTap,
     Key? key,
   }) : super(key: key);
@@ -81,23 +84,27 @@ class NotificationCard extends StatelessWidget {
   final void Function()? onTap;
   final String time;
   final String title;
-  final String  body;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      shape: RoundedRectangleBorder(
+        
+      borderRadius: BorderRadius.circular(5)),
+      tileColor: ColorConstants.primaryColor.withOpacity(.2),
       leading: CircleAvatar(
-        backgroundColor: ColorConstants.someRockGreen,
+        backgroundColor: ColorConstants.primaryColor,
         // foregroundColor: ColorConstants.someRockGreen,
         child: const Text(
-          "AD",
+          "T",
           style: TextStyle(color: Colors.white),
         ),
       ),
       onTap: onTap,
-      trailing:  Text(
+      trailing: Text(
         time,
-        style: const  TextStyle(fontSize: 12),
+        style: const TextStyle(fontSize: 12),
       ),
       title: Text(
         title,

@@ -34,8 +34,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title:  Text("Add Product"       ,   style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 22),
-      ),
+        title: Text(
+          "Add Product",
+          style: Theme.of(context).textTheme.headline3!.copyWith(fontWeight: FontWeight.w600),
+        ),
         elevation: 0.2,
       ),
       body: Container(
@@ -46,8 +48,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ProductNameTextFeild(data: data, productNameController: _productNameController),
-                  ProductPriceTextFeild(data: data, productPriceController: _productPriceController),
+                  ProductNameTextFeild(
+                      data: data,
+                      productNameController: _productNameController),
+                  ProductPriceTextFeild(
+                      data: data,
+                      productPriceController: _productPriceController),
                   SizedBox(
                     height: 70,
                     // color: Colors.red,
@@ -79,12 +85,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(
                                   width: 1.5,
-                                  color: ColorConstants.greenPantone),
+                                  color: ColorConstants.primaryColor),
                             ),
                             child: DropdownButton<String>(
-                              style: const TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                                 elevation: 20,
-                                dropdownColor: ColorConstants.someRockGreen,
+                                dropdownColor: ColorConstants.primaryColor,
                                 underline: Container(),
                                 value: _selectedProductCategory,
                                 items: _productCategory.map((String value) {
@@ -113,4 +119,3 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 }
-

@@ -1,3 +1,4 @@
+import 'package:block_agri_mart/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                   .copyWith(color: Colors.white, fontSize: 16),
             ),
             height: 50,
-            color: ColorConstants.greenPantone,
+            color: ColorConstants.primaryColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             minWidth: widget.width - 30,
@@ -72,6 +73,7 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
         builder: (context) {
           return Dialog(
               insetAnimationCurve: Curves.fastLinearToSlowEaseIn,
+              backgroundColor: Theme.of(context).backgroundColor,
               insetAnimationDuration: const Duration(milliseconds: 1500),
               elevation: 20,
               shape: RoundedRectangleBorder(
@@ -81,7 +83,8 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                   return Container(
                     height: 270,
                     decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.8),
+                        color:
+                            Theme.of(context).backgroundColor.withOpacity(0.8),
                         borderRadius: BorderRadius.circular(5)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,14 +102,13 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                                   : "Invalid ID";
                             },
                             hintText: 'Enter your Meta Musk ID',
-                            focusColor: ColorConstants.greenPantone,
+                            focusColor: ColorConstants.primaryColor,
                             suffix: IconButton(
                                 onPressed: () {
                                   widget.textEditingController.clear();
                                 },
                                 icon: const Icon(
                                   Icons.clear,
-                                  color: Colors.black,
                                 )),
                             controller: widget.textEditingController,
                           ),
@@ -135,15 +137,22 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                                 width: 100,
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: Theme.of(context).backgroundColor,
                                   borderRadius: BorderRadius.circular(5),
                                   border: Border.all(
                                       width: 1.5,
-                                      color: ColorConstants.greenPantone),
+                                      color: ColorConstants.primaryColor),
                                 ),
                                 child: DropdownButton<String>(
+                                    dropdownColor: Theme.of(context)
+                                        .backgroundColor
+                                        .withOpacity(1),
                                     underline: Container(),
                                     value: _selectedTypeSelected,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline3!
+                                        .copyWith(fontSize: 14),
                                     items: _userTypes.map((String value) {
                                       return DropdownMenuItem<String>(
                                         child: Text(value),
@@ -151,8 +160,12 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                                       );
                                     }).toList(),
                                     onChanged: (value) {
+                                      context
+                                          .read<AppStateManager>()
+                                          .setUserType(value!);
+
                                       setState(
-                                          () => _selectedTypeSelected = value!);
+                                          () => _selectedTypeSelected = value);
                                     }),
                               ),
                             ],
@@ -161,8 +174,8 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                         Center(
                           child: MaterialButton(
                             minWidth: 250,
-                            height: 40,
-                            color: ColorConstants.someRockGreen,
+                            height: 45,
+                            color: ColorConstants.primaryColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                             onPressed: validateMetaMuskID(
@@ -170,15 +183,20 @@ class _ConnectToWalletWidgetState extends State<ConnectToWalletWidget> {
                                 ? () {
                                     setState(() => _isConnecingtLabel = true);
 
-                                    //TODO: Connect to MetaMusk.......
-                                    Future.delayed(const Duration(seconds: 10),
+                                    // TODO: Connect to MetaMusk.......
+                                    Future.delayed(const Duration(seconds: 5),
                                         (() {
                                       Navigator.pop(context);
+                                      print("$_selectedTypeSelected UserType");
 
                                       context
                                           .read<AppStateManager>()
-                                          .setIsLoggedIn(true);
+                                          .setUserType(_selectedTypeSelected);
+
                                       context.go('/');
+                                      context
+                                          .read<AppStateManager>()
+                                          .setIsLoggedIn(true);
                                     }));
                                   }
                                 : null,

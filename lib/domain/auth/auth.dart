@@ -135,12 +135,12 @@ class _AuthScreenState extends State<AuthScreen>
                       height: 45,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
-                      color: ColorConstants.someRockGreen,
+                      color: ColorConstants.primaryColor,
                       onPressed: () {
                         print(_pageController.offset);
                         print(_pageController.initialPage);
                         _pageController.animateToPage(3,
-                            duration: const  Duration(microseconds: 600),
+                            duration: const Duration(microseconds: 600),
                             curve: Curves.ease);
                       },
                       child: const Text(

@@ -14,6 +14,8 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final TextEditingController _itemQuantityController = TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,14 +36,26 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
       // backgroundColor: Colors.transparent,
       extendBody: true,
-
-      drawer: const AppDrawer(),
+      appBar: CustomAppBar(
+          scaffoldKey: _scaffoldKey,                            
+          showCart: true,
+          showProfilePic: true,
+          title: 'Cart',
+          isHome: false,
+          showNotification: true,
+          onTransparentBackground: false),
 
       body: SafeArea(
           child: CartBody(
         itemQuantityController: _itemQuantityController,
         size: size,
       )),
+      bottomNavigationBar: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        height: 100,
+        color: Colors.red,
+        child: Row(),
+      ),
     );
   }
 
@@ -60,357 +74,111 @@ class CartBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.red,
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      child: Column(
-        children: [
-          Material(
-            borderRadius: BorderRadius.circular(5),
-            child: SizedBox(
-              height: size.height / 2 - 30,
-              child: PageView(
-                allowImplicitScrolling: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(AssetsConstant.oranges))),
-                    child: Stack(children: [
-                      Positioned(
-                          right: 5,
-                          top: 5,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white.withOpacity(0.65)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove)),
-                          ))
-                    ]),
-                  ), Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(AssetsConstant.cucumber))),
-                    child: Stack(children: [
-                      Positioned(
-                          right: 5,
-                          top: 5,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white.withOpacity(0.65)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove)),
-                          ))
-                    ]),
-                  ), Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(AssetsConstant.pepper))),
-                    child: Stack(children: [
-                      Positioned(
-                          right: 5,
-                          top: 5,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white.withOpacity(0.65)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove)),
-                          ))
-                    ]),
-                  ), Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(AssetsConstant.banana))),
-                    child: Stack(children: [
-                      Positioned(
-                          right: 5,
-                          top: 5,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.white.withOpacity(0.65)),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove)),
-                          ))
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 10),
+    child:  ListView.separated(
+        itemCount: 7,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            
+            height: 150,
             decoration: BoxDecoration(
-              // color: Colors.blue,
-              borderRadius: BorderRadius.circular(5),
+              color: ColorConstants.primaryColor.withOpacity(.15)
             ),
-            height: size.height / 2 - 50,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Quantity : ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        MaterialButton(
-                          color: ColorConstants.greenPantone,
-                          minWidth: 20,
-                          height: 30,
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        MaterialButton(
-                          minWidth: 20,
-                          height: 30,
-                          child: Text(
-                            "1",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline3!
-                                .copyWith(fontSize: 18),
-                          ),
-                          onPressed: () {},
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        MaterialButton(
-                          color: Colors.redAccent,
-                          minWidth: 20,
-                          height: 30,
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.remove,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Price : ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '23.45 ETH ',
-                      style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.red),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Discount : ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '067.3 %',
-                      style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.red),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                ),
-                const Divider(
-                  thickness: 3,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Total Cost: ',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline3!
-                          .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '34.34 ETH',
-                      style: Theme.of(context).textTheme.headline3!.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.red),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                MaterialButton(
-                    height: 50,
-                    color: ColorConstants.someRockGreen,
-                    minWidth: size.width - 30,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.payment_outlined,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Make Payment",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    onPressed: () {})
-              ],
-            ),
-          )
-        ],
+           child: Row(children: [
+            
+           ],)
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(
+            height: 5,
+            
+          );
+        },
       ),
+     
     );
   }
 }
 
-class FloatBottomButtoms extends StatelessWidget {
-  const FloatBottomButtoms(
-      {Key? key, required this.size, required this.onPayment})
-      : super(key: key);
-  final Size size;
-  final void Function()? onPayment;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      height: size.height / 6,
-      child: Column(
-        children: [
-          FloatingActionButton(
-              heroTag: 'payment',
-              elevation: 10,
-              backgroundColor: ColorConstants.someRockGreen,
-              shape: RoundedRectangleBorder(
-                  side:
-                      BorderSide(color: ColorConstants.greenPantone, width: 2),
-                  borderRadius: BorderRadius.circular(30)),
-              child: const Icon(
-                Icons.payment,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: onPayment),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FloatingActionButton(
-                  heroTag: 'home',
-                  elevation: 10,
-                  backgroundColor: ColorConstants.someRockGreen,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: ColorConstants.greenPantone, width: 2),
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Icon(
-                    Icons.home,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    //TODO: Go to home...
-                    context.goNamed('home');
-                  }),
-              SizedBox(
-                width: size.width / 4,
-              ),
-              FloatingActionButton(
-                  heroTag: 'profile',
-                  elevation: 10,
-                  backgroundColor: ColorConstants.someRockGreen,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                          color: ColorConstants.greenPantone, width: 2),
-                      borderRadius: BorderRadius.circular(30)),
-                  child: const Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    ///Go to profile
-                    context.goNamed('profile');
-                  }),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
+
+
+
+
+// class FloatBottomButtoms extends StatelessWidget {
+//   const FloatBottomButtoms(
+//       {Key? key, required this.size, required this.onPayment})
+//       : super(key: key);
+//   final Size size;
+//   final void Function()? onPayment;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.transparent,
+//       height: size.height / 6,
+//       child: Column(
+//         children: [
+//           FloatingActionButton(
+//               heroTag: 'payment',
+//               elevation: 10,
+//               backgroundColor: ColorConstants.primaryColor,
+//               shape: RoundedRectangleBorder(
+//                   side:
+//                       BorderSide(color: ColorConstants.primaryColor, width: 2),
+//                   borderRadius: BorderRadius.circular(30)),
+//               child: const Icon(
+//                 Icons.payment,
+//                 color: Colors.white,
+//                 size: 30,
+//               ),
+//               onPressed: onPayment),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               FloatingActionButton(
+//                   heroTag: 'home',
+//                   elevation: 10,
+//                   backgroundColor: ColorConstants.primaryColor,
+//                   shape: RoundedRectangleBorder(
+//                       side: BorderSide(
+//                           color: ColorConstants.primaryColor, width: 2),
+//                       borderRadius: BorderRadius.circular(30)),
+//                   child: const Icon(
+//                     Icons.home,
+//                     color: Colors.white,
+//                     size: 30,
+//                   ),
+//                   onPressed: () {
+//                     //TODO: Go to home...
+//                     context.goNamed('home');
+//                   }),
+//               SizedBox(
+//                 width: size.width / 4,
+//               ),
+//               FloatingActionButton(
+//                   heroTag: 'profile',
+//                   elevation: 10,
+//                   backgroundColor: ColorConstants.primaryColor,
+//                   shape: RoundedRectangleBorder(
+//                       side: BorderSide(
+//                           color: ColorConstants.primaryColor, width: 2),
+//                       borderRadius: BorderRadius.circular(30)),
+//                   child: const Icon(
+//                     Icons.account_circle_outlined,
+//                     color: Colors.white,
+//                     size: 30,
+//                   ),
+//                   onPressed: () {
+//                     ///Go to profile
+//                     context.goNamed('profile');
+//                   }),
+//             ],
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }

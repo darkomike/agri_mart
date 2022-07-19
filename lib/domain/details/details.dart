@@ -14,9 +14,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   TextEditingController? _itemQuantityController;
 
-    final _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -34,11 +32,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final data = MediaQuery.of(context);
     return Scaffold(
-      drawer: const AppDrawer(),
       appBar: CustomAppBar(
-                      isHome: false,
-
-        scaffoldKey: _scaffoldKey, showCart: true, showNotification: true, title: '', showProfilePic: true,onTransparentBackground: true),
+          isHome: false,
+          scaffoldKey: _scaffoldKey,
+          showCart: true,
+          showNotification: true,
+          title: '',
+          showProfilePic: true,
+          onTransparentBackground: true),
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -52,7 +53,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage(AssetsConstant.pepper))),
+                      image: AssetImage(AssetsConstant.oranges))),
               child: Stack(
                 children: [
                   DetailsUpper(data: data),
@@ -89,7 +90,7 @@ class DetailsLower extends StatelessWidget {
           width: data.size.width,
           height: data.size.height / 1.8,
           decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).backgroundColor.withOpacity(1),
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30), topRight: Radius.circular(30))),
           child: Column(
@@ -120,7 +121,7 @@ class AddToCartButton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: MaterialButton(
         height: 50,
-        color: ColorConstants.someRockGreen,
+        color: ColorConstants.primaryColor,
         onPressed: () {},
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +152,7 @@ class ItemDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: [Text(TextConstant.dummyText4)],
+      children: [Text(TextConstant.dummyText4, style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 12),)],
     );
   }
 }
@@ -173,7 +174,7 @@ class ItemQuantity extends StatelessWidget {
           width: 5,
         ),
         MaterialButton(
-          color: ColorConstants.greenPantone,
+          color: ColorConstants.primaryColor,
           minWidth: 20,
           height: 30,
           onPressed: () {},
@@ -184,7 +185,7 @@ class ItemQuantity extends StatelessWidget {
         ),
         const SizedBox(
           width: 5,
-        ), 
+        ),
         // Container(
         //     height: 40,
         //     width: 60,
@@ -193,18 +194,22 @@ class ItemQuantity extends StatelessWidget {
         //       keyboardType: TextInputType.phone,
         //       textInputAction: TextInputAction.done,
         //       controller: _itemQuantityController,
-              
+
         //       decoration: const InputDecoration(
-                
+
         //           contentPadding: EdgeInsets.all(10),
         //           border: InputBorder.none),
         //     )),
 
         MaterialButton(
-          child: Text("0", style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),),
-           onPressed: (){}, 
-           ),
-            
+          child: Text(
+            "0",
+            style:
+                Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),
+          ),
+          onPressed: () {},
+        ),
+
         const SizedBox(
           width: 5,
         ),
@@ -280,7 +285,7 @@ class DetailsUpper extends StatelessWidget {
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
             decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.75),
+                color: Theme.of(context).backgroundColor.withOpacity(0.75),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -292,7 +297,7 @@ class DetailsUpper extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  'Carrington Cash',
+                  '0x345678998775634456',
                   style: Theme.of(context)
                       .textTheme
                       .headline3!

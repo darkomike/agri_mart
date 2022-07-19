@@ -24,7 +24,7 @@ class ProductDescription extends StatelessWidget {
       child: CustomTextFormField(
           minLines: 3,
           maxLines: 5,
-          labelStyle: TextStyle(color: ColorConstants.greenPantone),
+          labelStyle: TextStyle(color: ColorConstants.primaryColor),
           hintText: 'Product Description ',
           controller: _productDescriptionController,
           border: const OutlineInputBorder(

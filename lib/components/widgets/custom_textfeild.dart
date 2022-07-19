@@ -45,10 +45,11 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      
       validator: validator,
       autocorrect: true,
       autofocus: autofocus ?? false,
-      cursorColor: cursorColor ?? ColorConstants.greenPantone,
+      cursorColor: cursorColor ?? ColorConstants.primaryColor,
       keyboardType: keyboardType,
       onChanged: onChanged,
       keyboardAppearance: keyboardAppearance,
@@ -62,10 +63,14 @@ class CustomTextFormField extends StatelessWidget {
           focusedBorder: focusedBorder,
           disabledBorder: disabledBorder,
           enabledBorder: enabledBoarder,
-          fillColor: ColorConstants.greenPantone,
-          focusColor: focusColor,
+          fillColor: ColorConstants.primaryColor,
+          focusColor: ColorConstants.primaryColor,
+          
           label: label,
+          
           hintText: hintText,
+          iconColor: Theme.of(context).iconTheme.color,
+          hintStyle: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 14),
           suffix: suffix,
           border: border),
     );

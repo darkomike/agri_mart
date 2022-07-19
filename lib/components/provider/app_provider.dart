@@ -3,7 +3,7 @@ import '../../main.dart';
 
 class AppStateManager with ChangeNotifier {
   bool _loggedIn = prefs.getBool('loggedIn')!;
-  bool _darkModeOn = false;
+  bool _darkModeOn = prefs.getBool('isDarkModeOn')!;
   String _navigationBottomSelected = 'home';
   String _userType = prefs.getString('userType')!;
 
@@ -23,6 +23,8 @@ class AppStateManager with ChangeNotifier {
 
   setIsDarkModeOn(bool isDarkModeOn) {
     _darkModeOn = isDarkModeOn;
+    prefs.setBool('isDarkModeOn', isDarkModeOn);
+
     notifyListeners();
   }
 
@@ -42,6 +44,7 @@ class AppStateManager with ChangeNotifier {
 
   setUserType(String userType) {
     _userType = userType;
+    prefs.setString('userType', userType);
     notifyListeners();
   }
 }

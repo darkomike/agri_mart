@@ -35,14 +35,13 @@ class EmptyCart extends StatelessWidget {
                 minWidth: 150,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
-                    side: BorderSide(color: ColorConstants.someRockGreen)),
+                    side: BorderSide(color: ColorConstants.primaryColor)),
                 child: Text(
                   'Add Items',
-                  style: TextStyle(color: ColorConstants.someRockGreen),
+                  style: TextStyle(color: ColorConstants.primaryColor),
                 ),
                 onPressed: () {
                   context.goNamed('home');
-                  
                 })
           ],
         ),

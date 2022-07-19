@@ -1,9 +1,5 @@
-import 'package:block_agri_mart/components/theme/theme.dart';
 import 'package:flutter/material.dart';
-
 import '../../components/components.dart';
-import '../nav/appbar/custom_app_bar.dart';
-import '../drawer/drawer.dart';
 
 class RequestsScreen extends StatefulWidget {
   const RequestsScreen({Key? key}) : super(key: key);
@@ -16,13 +12,13 @@ class _RequestsScreenState extends State<RequestsScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      
       child: ListView.separated(
         itemCount: 20,
         shrinkWrap: true,
         physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
-        return  RequestCard(
+          return RequestCard(
               body: TextConstant.dummyText1,
               time: '23:34',
               title: 'Request title');
@@ -36,8 +32,6 @@ class _RequestsScreenState extends State<RequestsScreen> {
     );
   }
 }
-
-
 
 class RequestCard extends StatelessWidget {
   const RequestCard({
@@ -57,7 +51,7 @@ class RequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: ColorConstants.someRockGreen,
+        backgroundColor: ColorConstants.primaryColor,
         // foregroundColor: ColorConstants.someRockGreen,
         child: const Text(
           "R",
@@ -67,14 +61,16 @@ class RequestCard extends StatelessWidget {
       onTap: onTap,
       trailing: Text(
         time,
-        style: const TextStyle(fontSize: 12),
+        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 10),
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 18),
+        style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 16),
       ),
       subtitle: Text(
         body,
+                style: Theme.of(context).textTheme.headline3!.copyWith(fontSize: 12),
+
         overflow: TextOverflow.ellipsis,
       ),
     );

@@ -1,3 +1,5 @@
+import 'package:block_agri_mart/domain/home/components/see_all_top_sellers.dart';
+import 'package:block_agri_mart/domain/home/components/see_all_trending_products.dart';
 import 'package:block_agri_mart/domain/products/components/add_product.dart';
 import 'package:block_agri_mart/domain/products/products.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +10,6 @@ import '../../domain/auth/auth.dart';
 import '../../domain/cart/cart.dart';
 import '../../domain/home/home.dart';
 import '../../domain/notifications/notification.dart';
-import '../../domain/orders/orders.dart';
 import '../../domain/profile/profile.dart';
 import '../../domain/requests/requests.dart';
 import '../../domain/transactions/transactions.dart';
@@ -49,21 +50,21 @@ final detailsRouter = GoRoute(
     path: 'details',
     builder: (context, state) => const DetailsScreen());
 
-final ordersRouter = GoRoute(
-    name: 'orders',
-    path: 'orders',
-    builder: (context, state) => const OrdersScreen());
+// final ordersRouter = GoRoute(
+//     name: 'orders',
+//     path: 'orders',
+//     builder: (context, state) => const RecommendsScreen());
 
 final profileRouter = GoRoute(
     name: 'profile',
     path: 'profile',
     builder: (context, state) => const ProfileScreen());
 
-final productsRouter = GoRoute(
-    name: 'products',
-    path: 'products',
-    routes: [addProductRouter],
-    builder: (context, state) => const ProductsScreen());
+// final productsRouter = GoRoute(
+//     name: 'products',
+//     path: 'products',
+//     routes: [addProductRouter],
+//     builder: (context, state) => const ProductsScreen());
 
 final addProductRouter = GoRoute(
     name: 'add_product',
@@ -75,16 +76,25 @@ final notificationsRouter = GoRoute(
     path: 'notifications',
     builder: (context, state) => const NotificationPage());
 
+final sellersRouter = GoRoute(
+    name: 'sellers',
+    path: 'sellers',
+    builder: (context, state) => SeeAllTopSellerPage());
+
+final trendingProductsRouter = GoRoute(
+    name: 'trending_products',
+    path: 'trending_products',
+    builder: (context, state) => SeeAllTrendingProductsPage());
+
 final homeRouter = GoRoute(
     name: 'home',
     path: '/',
     routes: [
       profileRouter,
       notificationsRouter,
-      ordersRouter,
-      transactionsRouter,
-      requestsRouter,
-      productsRouter,
+      addProductRouter,
+      sellersRouter,
+      trendingProductsRouter,
       detailsRouter,
       cartRouter
     ],

@@ -1,43 +1,45 @@
 import 'package:flutter/material.dart';
 
 import 'category_cards.dart';
-import 'category_list.dart';
+import 'product_list.dart';
 
 class Categories extends StatelessWidget {
   const Categories({
     Key? key,
-    required this.width, required this.controller,
+    required this.width, required this.availableProductKey,
     required this.height,
   }) : super(key: key);
 
   final double width;
   final double height;
-  final ScrollController controller;
-  
+  final  availableProductKey;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: availableProductKey,
       margin: const EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Categories',
+            'Available products',
             style: Theme.of(context)
                 .textTheme
                 .headline3!
                 .copyWith(fontWeight: FontWeight.w600),
           ),
-
-          const SingleChildScrollView(
+          SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            physics:  BouncingScrollPhysics(),
-            child: CategoryCards(),
+            key: UniqueKey(),
+            physics: const BouncingScrollPhysics(),
+            child: const CategoryCards(),
           ),
-          CategoryList(
+          const SizedBox(
+            height: 10,
+          ),
+          AvailableProductList(
             width: width,
-            controller: controller,
             height: height,
           )
         ],

@@ -9,9 +9,11 @@ late SharedPreferences prefs;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
-
   prefs.setBool("loggedIn", prefs.getBool('loggedIn') ?? false);
+  prefs.setBool("isDarkModeOn", prefs.getBool('isDarkModeOn') ?? false);
   prefs.setString("userType", prefs.getString('userType') ?? "Buyer");
+
+  
 
   runApp(const MyApp());
 }

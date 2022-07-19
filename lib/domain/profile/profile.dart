@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/components.dart';
-import '../drawer/drawer.dart';
 import '../nav/appbar/custom_app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -22,12 +22,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
       appBar: CustomAppBar(
-                      isHome: false,
-
+        isHome: false,
         scaffoldKey: _scaffoldKey,
         showCart: true,
-        showNotification: false,
-        onTransparentBackground: true,
+        showNotification: true,
+        onTransparentBackground: false,
         showProfilePic: false,
         title: '',
       ),
@@ -38,7 +37,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             SizedBox(
               height: 220,
-              // color: Colors.red,
               child: Stack(
                 children: [
                   Container(
@@ -78,29 +76,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(90),
-                            color: Colors.white),
+                            color: Theme.of(context)
+                                .backgroundColor
+                                .withOpacity(1)),
                         child: CircleAvatar(
                             backgroundImage:
                                 AssetImage(AssetsConstant.profilePic2)),
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 10,
-                    child: MaterialButton(
-                      height: 30,
-                      onPressed: () {},
-                      child: Text(
-                        'Edit Profile',
-                        style: TextStyle(color: ColorConstants.someRockGreen),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: BorderSide(
-                              width: 1, color: ColorConstants.someRockGreen)),
-                    ),
-                  )
                 ],
               ),
             ),
@@ -112,21 +96,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Carrington Cash",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3!
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 2,
-                  ),
-                  Text(
                     "0x234567898765433456",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3!
-                        .copyWith(fontSize: 14, color: Colors.red),
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                        fontSize: 18, color: Colors.red.withOpacity(0.85)),
                   ),
                   const SizedBox(
                     height: 10,
@@ -136,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Center(
                         child: Text(
-                          TextConstant.dummyText3,
+                          TextConstant.dummyText2,
                           style: Theme.of(context)
                               .textTheme
                               .headline3!
@@ -169,73 +141,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: [
-                    MaterialButton(
-                      color: ColorConstants.someRockGreen,
-                      height: 40,
-                      onPressed: () {},
-                      child: const Text(
-                        'Purchases',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          side: BorderSide(
-                              width: 1, color: ColorConstants.someRockGreen)),
+            Container(
+              padding: EdgeInsets.only(left: 10),
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    color: ColorConstants.primaryColor,
+                    height: 40,
+                    onPressed: () {},
+                    child: const Text(
+                      'Purchases',
+                      style: TextStyle(color: Colors.white),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    MaterialButton(
-                      height: 40,
-                      onPressed: () {},
-                      color: Colors.grey.shade400,
-                      child: const Text(
-                        'Orders',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      shape: RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
-                      ),
+                        side: BorderSide(
+                            width: 1, color: ColorConstants.primaryColor)),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  MaterialButton(
+                    height: 40,
+                    onPressed: () {},
+                    color: Colors.grey.shade400,
+                    child: const Text(
+                      'Settings',
+                      style: TextStyle(color: Colors.black),
                     ),
-                    const SizedBox(
-                      width: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    MaterialButton(
-                      height: 40,
-                      onPressed: () {},
-                      color: Colors.grey.shade400,
-                      child: const Text(
-                        'Requests',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    MaterialButton(
-                      height: 40,
-                      onPressed: () {},
-                      color: Colors.grey.shade400,
-                      child: const Text(
-                        'Settings',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -245,34 +185,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 physics: const ClampingScrollPhysics(),
                 allowImplicitScrolling: true,
                 pageSnapping: true,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
                 children: [
                   Container(
-                    color: Colors.teal,
+                    color: Theme.of(context).backgroundColor.withOpacity(1),
                     height: data.size.height - 120,
-                    child: const Center(
-                      child: Text("No Purchases"),
+                    child: Center(
+                      child: Text(
+                        "No Purchases",
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
                     ),
                   ),
                   Container(
-                    color: Colors.red,
+                    color: Theme.of(context).backgroundColor.withOpacity(1),
                     height: data.size.height - 120,
-                    child: const Center(
-                      child: Text("No Orders"),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    height: data.size.height - 120,
-                    child: const Center(
-                      child: Text("No Requests"),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.indigoAccent,
-                    height: data.size.height - 120,
-                    child: const Center(
-                      child: Text("Settings"),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SwitchListTile(
+                              activeColor: ColorConstants.primaryColor,
+                              title: Text(
+                                context.watch<AppStateManager>().darkModeOn
+                                    ? 'Dark Mode On'
+                                    : 'Dark Mode Off',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline3!
+                                    .copyWith(fontSize: 14),
+                              ),
+                              value:
+                                  context.watch<AppStateManager>().darkModeOn,
+                              onChanged: (value) {
+                                context
+                                    .read<AppStateManager>()
+                                    .setIsDarkModeOn(value);
+                              }),
+                          ListTile(
+                            title: Text(
+                              'Logout',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3!
+                                  .copyWith(fontSize: 14),
+                            ),
+                            onTap: () {},
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],

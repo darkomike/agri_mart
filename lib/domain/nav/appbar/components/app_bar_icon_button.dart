@@ -1,16 +1,16 @@
-
-
-
 import 'package:flutter/material.dart';
 
 import '../../../../components/components.dart';
 
-
 class AppBarIconButton extends StatelessWidget {
   const AppBarIconButton({
-    required this.onPressed, this.buttonMarginT, this.buttonMarginL, this.buttonMarginB,
+    required this.onPressed,
+    this.buttonMarginT,
+    this.buttonMarginL,
+    this.buttonMarginB,
     required this.count,
-    required this.icon, required this.showBgColor,
+    required this.icon,
+    required this.showBgColor,
     this.toolTip,
     required this.showCount,
     Key? key,
@@ -22,7 +22,7 @@ class AppBarIconButton extends StatelessWidget {
   final int? count;
   final bool showCount;
   final bool showBgColor;
-  
+
   final double? buttonMarginL;
   final double? buttonMarginB;
   final double? buttonMarginT;
@@ -31,9 +31,14 @@ class AppBarIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(2),
-      margin:  EdgeInsets.only(right: 5, bottom: buttonMarginB ?? 0 , top: buttonMarginT ?? 0, left: buttonMarginL ?? 0),
+      margin: EdgeInsets.only(
+          right: 5,
+          bottom: buttonMarginB ?? 0,
+          top: buttonMarginT ?? 0,
+          left: buttonMarginL ?? 0),
       decoration: BoxDecoration(
-          color: showBgColor ? Colors.white.withOpacity(0.65) : Colors.transparent,
+          color:
+              showBgColor ? Theme.of(context).backgroundColor.withOpacity(0.65) : Colors.transparent,
           borderRadius: BorderRadius.circular(5)),
       height: 40,
       child: Stack(
@@ -48,7 +53,7 @@ class AppBarIconButton extends StatelessWidget {
                       //   width: 15,
                       padding: const EdgeInsets.only(left: 4, right: 4),
                       decoration: BoxDecoration(
-                          color: ColorConstants.someRockGreen,
+                          color: ColorConstants.primaryColor,
                           borderRadius: BorderRadius.circular(20)),
                       child: Text(
                         "$count",

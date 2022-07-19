@@ -20,11 +20,11 @@ class LightTheme {
       color: Colors.black,
     ),
     headline3: TextStyle(
-      fontSize: 21.0,
+      fontSize: 16.0,
       color: Colors.black,
     ),
     headline6: TextStyle(
-      fontSize: 18.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
@@ -34,25 +34,26 @@ class LightTheme {
   static ThemeData light() {
     return ThemeData(
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: ColorConstants.someRockGreen,
-          selectedIconTheme: const IconThemeData(color: Colors.white, size: 16),
-          unselectedIconTheme: const IconThemeData(color: Colors.white, size: 14),
-          selectedItemColor: Colors.white,
-          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w300),
-          showSelectedLabels: true,showUnselectedLabels: true,
-          elevation: 10,
-
-          ),
+        backgroundColor: ColorConstants.primaryColor,
+        selectedIconTheme: const IconThemeData(color: Colors.white, size: 16),
+        unselectedIconTheme: const IconThemeData(color: Colors.white, size: 14),
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w300),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        elevation: 10,
+      ),
       backgroundColor: Colors.white,
       inputDecorationTheme:
-          InputDecorationTheme(fillColor: ColorConstants.someRockGreen),
-      primaryColor: ColorConstants.someRockGreen,
-      accentColor: ColorConstants.someRockGreen,
+          InputDecorationTheme(fillColor: ColorConstants.primaryColor),
+      primaryColor: ColorConstants.primaryColor,
+      accentColor: ColorConstants.primaryColor,
       scaffoldBackgroundColor: ColorConstants.scaffoldBackgroundColorL,
       fontFamily: 'Poppins',
       iconTheme: const IconThemeData(
         size: 20,
+        color: Colors.black
       ),
       textTheme: lightTextTheme,
       appBarTheme: const AppBarTheme(

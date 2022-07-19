@@ -33,12 +33,17 @@ class DarkTheme {
   static ThemeData dark() {
     return ThemeData(
       appBarTheme: AppBarTheme(
-        backgroundColor: ColorConstants.backgroundColorD,
+        backgroundColor: ColorConstants.backgroundColorD.withOpacity(0.8),
       ),
-      backgroundColor: ColorConstants.backgroundColorD,
-      scaffoldBackgroundColor: ColorConstants.backgroundColorD,
+      backgroundColor: ColorConstants.backgroundColorD.withOpacity(0.8),
+      scaffoldBackgroundColor: ColorConstants.backgroundColorD.withOpacity(0.8), 
       fontFamily: 'Poppins',
+      primaryColor: ColorConstants.primaryColor,
       textTheme: darkTextTheme,
+      iconTheme: const IconThemeData(
+        size: 20,
+        color: Colors.white
+      ),
     );
   }
 }

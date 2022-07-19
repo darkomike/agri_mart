@@ -1,27 +1,41 @@
-
+import 'package:block_agri_mart/components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/constants/assets_constant.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({
-    Key? key,
-  }) : super(key: key);
+class TrendingProductCard extends StatelessWidget {
+  const TrendingProductCard(
+      {Key? key,
+      required this.addCart,
+      required this.discount,
+      required this.name,
+      required this.onPressed,
+      required this.price,
+      required this.productThumbNail,
+      required this.sellerThumbNail})
+      : super(key: key);
+
+  final String name;
+  final String productThumbNail;
+  final String sellerThumbNail;
+  final double price;
+  final double discount;
+  final void Function()? addCart;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: onPressed,
       child: Container(
         width: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            gradient: const LinearGradient(
-                colors: [
+            gradient: const LinearGradient(colors: [
               Color(0xFF02AAB0),
               Color(0xFF00CDAC),
             ])),
-        height: 190,
         child: Stack(
           children: [
             Column(
@@ -36,8 +50,7 @@ class ProductCard extends StatelessWidget {
                       topRight: Radius.circular(5),
                     ),
                     image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(AssetsConstant.oranges)),
+                        fit: BoxFit.cover, image: AssetImage(productThumbNail)),
                   ),
                 ),
                 const SizedBox(
@@ -50,24 +63,31 @@ class ProductCard extends StatelessWidget {
                     ),
                     CircleAvatar(
                       radius: 15,
-                      backgroundImage: AssetImage(AssetsConstant.profilePic1),
+                      backgroundImage: AssetImage(sellerThumbNail),
                     ),
                     const SizedBox(
                       width: 4,
                     ),
-                    const Text(
-                      "Avocado Pear",
-                      style: TextStyle(fontSize: 16),
+                    Text(
+                      name,
+                      style: const TextStyle(fontSize: 16),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
+                 const SizedBox(
+                  height: 5,
+                ),
               ],
             ),
-            Center(
+            Positioned(
+              bottom: 55,
+              left: 15, 
               child: Material(
+                elevation: 10,
+                shadowColor: Colors.green,
                 borderRadius: BorderRadius.circular(5),
-                color: const Color(0xFFF5F0EA).withOpacity(0.65),
+                color: const Color(0xFFF5F0EA).withOpacity(0.70),
                 child: SizedBox(
                   height: 60,
                   width: 170,
@@ -76,38 +96,38 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Price",
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            "23.45 ETH",
-                            style: TextStyle(fontSize: 14),
+                            "$price ETH",
+                            style: const TextStyle(fontSize: 12), overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Discount",
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
                           Text(
-                            "5.4 %",
-                            style: TextStyle(fontSize: 14),
+                            "$discount %",
+                            style: const TextStyle(fontSize: 12),overflow: TextOverflow.ellipsis
                           ),
                         ],
                       ),
                     ],
                   ),
-                ),
+                ),      
               ),
             ),
-            Positioned(
+          context.watch<AppStateManager>().userType.toLowerCase() == 'buyer' ?   Positioned(
               right: 0,
               child: Material(
                   color: const Color(0xFFF5F0EA).withOpacity(0.65),
@@ -115,15 +135,12 @@ class ProductCard extends StatelessWidget {
                       bottomLeft: Radius.circular(5),
                       topRight: Radius.circular(5)),
                   child: IconButton(
-                      onPressed: () {
-                        //TODO: Add to cart
-                      },
+                      onPressed: addCart,
                       icon: const Icon(Icons.add_shopping_cart_outlined))),
-            )
+            ): const SizedBox()
           ],
         ),
       ),
     );
   }
 }
-

@@ -23,7 +23,7 @@ class ProductNameTextFeild extends StatelessWidget {
       const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: CustomTextFormField(
           labelStyle:
-          TextStyle(color: ColorConstants.greenPantone),
+          TextStyle(color: ColorConstants.primaryColor),
           hintText: 'Product Name',
           controller: _productNameController,
           border: const OutlineInputBorder(
