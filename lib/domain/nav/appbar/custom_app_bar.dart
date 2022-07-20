@@ -88,6 +88,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       : const SizedBox(
                           width: 10,
                         ),
+                  context.watch<AppStateManager>().userType.toLowerCase() == 'seller' ?      AppBarIconButton(
+                              showBgColor: onTransparentBackground,
+                              onPressed: () {
+                                //TODO: GO to add product...
+                                context.goNamed('add_product');
+                              },
+                              icon: const Icon(Icons.add_box),
+                              showCount: false,
+                              count: 0,
+                            )
+                          : const SizedBox(),
                   showProfilePic
                       ? Container(
                           margin: const EdgeInsets.only(right: 5),
